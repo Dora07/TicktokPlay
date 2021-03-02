@@ -38,6 +38,9 @@ class ViewController: UIViewController
     let player = AVQueuePlayer()
     //音樂循環播放
     var looper: AVPlayerLooper?
+    
+    
+    
     //  表單載入
     override func viewDidLoad()
     {
@@ -51,7 +54,8 @@ class ViewController: UIViewController
         PlayList.append(SongList(Name:"清空", Singer:"王忻辰_蘇星婕", AlbumImage:"清空"))
         PlayList.append(SongList(Name:"錯位時空", Singer:"艾辰", AlbumImage:"錯位時空"))
         PlayList.append(SongList(Name:"星辰大海", Singer:"黃霄雲", AlbumImage:"星辰大海"))
-      
+       
+     
         //  播放音樂
         PlaySong()
         //執行現在播放的秒數
@@ -74,17 +78,18 @@ class ViewController: UIViewController
     {
         if index < PlayList.count
         {
-            if index < 0
+            if index  < 0
             {
                 index = PlayList.count - 1
+     
             }
-            let album = PlayList[index]
-            CurrectSong = album
-            if album != nil
+            let AlbumObj = PlayList[index]
+            CurrectSong = AlbumObj
+            if AlbumObj != nil
             {
-                let SongName:String = album.Name
-                let SingerName:String = album.Singer
-                let ImageName :String = album.AlbumImage
+                let SongName:String = AlbumObj.Name
+                let SingerName:String = AlbumObj.Singer
+                let ImageName :String = AlbumObj.AlbumImage
                 
                 //  設定歌手歌曲Label顯示
                 self.SongLabel.text = SongName
@@ -97,7 +102,7 @@ class ViewController: UIViewController
             let FileUrl = Bundle.main.url(forResource: SongName, withExtension: "mp4")!
                 let PlayerItem = AVPlayerItem(url: FileUrl)
                player.replaceCurrentItem(with: PlayerItem)
-                player.volume = 0.7
+                player.volume = 0.5
                looper = AVPlayerLooper(player: player, templateItem: PlayerItem)
                 
                 
@@ -128,13 +133,12 @@ class ViewController: UIViewController
                 
                 
                 }
-            else
-            {
+        }else{
              index = 0
             }
             
             
-        }
+        
     }
    
     //  播放/暫停
@@ -145,7 +149,8 @@ class ViewController: UIViewController
                 player.play()
                 PlayButton.setImage(PauseItem, for: UIControl.State.normal)
             }
-            else {
+         else
+            {
                 
                     player.pause()
                     PlayButton.setImage(PlayItem, for: UIControl.State.normal)
@@ -160,15 +165,18 @@ class ViewController: UIViewController
     {
         index = index  + 1
         PlaySong()
+        
+    print(index)
       
     }
     
     //播放前一首
     @IBAction func BackButtonAction(_ sender: UIButton)
     {
-        index = index  - 1
+    index -= 0
         PlaySong()
-        
+        print(index)
+          
         
     }
 
