@@ -163,7 +163,7 @@ class ViewController: UIViewController
     //播放下一首
     @IBAction func NextSongAction(_ sender: UIButton)
     {
-        index = index  + 1
+        index -= 1
         PlaySong()
         
     print(index)
@@ -173,7 +173,8 @@ class ViewController: UIViewController
     //播放前一首
     @IBAction func BackButtonAction(_ sender: UIButton)
     {
-    index -= 0
+   
+        index -= 0
         PlaySong()
         print(index)
           
