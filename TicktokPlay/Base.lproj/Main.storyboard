@@ -23,6 +23,9 @@
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="68S-0k-tyI">
                                 <rect key="frame" x="33" y="516" width="350" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="SongSliderAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="wEp-Qb-sgV"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Song" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5C-tW-MPt">
                                 <rect key="frame" x="63" y="430" width="285" height="36"/>
@@ -39,14 +42,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlP-IU-a32">
-                                <rect key="frame" x="35" y="553" width="36" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4d-Q6-xLB">
-                                <rect key="frame" x="345" y="540" width="36" height="46"/>
+                                <rect key="frame" x="35" y="553" width="70" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -85,39 +81,17 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                 </state>
                                 <connections>
-                                    <action selector="BackButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IJ0-GO-SLq"/>
+                                    <action selector="BackButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UEE-pW-Cx3"/>
+                                    <action selector="NextSongAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="znu-2d-f7k"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbP-Eh-LI8">
-                                <rect key="frame" x="310" y="751" width="65" height="55"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4d-Q6-xLB">
+                                <rect key="frame" x="343" y="540" width="71" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="repeat" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gyi-Md-Fkw">
-                                <rect key="frame" x="176" y="751" width="65" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="shuffle" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7VT-9C-RT1">
-                                <rect key="frame" x="59" y="750" width="65" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="chart.bar.doc.horizontal" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
-                                </state>
-                                <connections>
-                                    <segue destination="UHV-Gj-6qI" kind="show" id="a8y-nE-JWn"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -129,42 +103,20 @@
                         <outlet property="NextButton" destination="cGe-gp-X5b" id="087-iA-V3z"/>
                         <outlet property="NowPlayingLabel" destination="GlP-IU-a32" id="MBA-J5-2UZ"/>
                         <outlet property="PlayButton" destination="qC9-cS-JLT" id="jHe-Z7-CLS"/>
-                        <outlet property="RepeatButton" destination="DbP-Eh-LI8" id="Oeu-lf-Lyw"/>
-                        <outlet property="ShuffleButton" destination="Gyi-Md-Fkw" id="fbv-p6-xHH"/>
                         <outlet property="SingerLabel" destination="rc5-mb-5yZ" id="8Rk-eU-BxQ"/>
                         <outlet property="SongLabel" destination="D5C-tW-MPt" id="ilj-ZD-VM5"/>
                         <outlet property="SongSlider" destination="68S-0k-tyI" id="2He-CN-frT"/>
-                        <outlet property="WordsButton" destination="7VT-9C-RT1" id="5Jx-3Q-rx5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="88.392857142857139"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="lvs-ZA-Mga">
-            <objects>
-                <viewController id="UHV-Gj-6qI" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="qt5-Sl-DPh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="BYn-LN-WEp"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="bIk-Tq-x7V"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hzE-yp-oY2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="640" y="95"/>
-        </scene>
     </scenes>
     <resources>
         <image name="backward.fill" catalog="system" width="128" height="79"/>
-        <image name="chart.bar.doc.horizontal" catalog="system" width="115" height="128"/>
         <image name="forward.fill" catalog="system" width="128" height="79"/>
         <image name="pause.fill" catalog="system" width="116" height="128"/>
-        <image name="repeat" catalog="system" width="128" height="99"/>
-        <image name="shuffle" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

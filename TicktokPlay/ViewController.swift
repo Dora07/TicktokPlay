@@ -24,12 +24,6 @@ class ViewController: UIViewController
     @IBOutlet weak var NextButton: UIButton!
     //前一首按鈕
     @IBOutlet weak var BackButton: UIButton!
-    //隨機播放按鈕
-    @IBOutlet weak var ShuffleButton: UIButton!
-    //重複播放循環按鈕
-    @IBOutlet weak var RepeatButton: UIButton!
-    //歌詞播放按鈕
-    @IBOutlet weak var WordsButton: UIButton!
     //目前播放秒數
     @IBOutlet weak var NowPlayingLabel: UILabel!
     //總共秒數
@@ -57,15 +51,23 @@ class ViewController: UIViewController
         PlayList.append(SongList(Name:"清空", Singer:"王忻辰_蘇星婕", AlbumImage:"清空"))
         PlayList.append(SongList(Name:"錯位時空", Singer:"艾辰", AlbumImage:"錯位時空"))
         PlayList.append(SongList(Name:"星辰大海", Singer:"黃霄雲", AlbumImage:"星辰大海"))
-        //隨機播放
-        PlayList.shuffle()
+      
         //  播放音樂
         PlaySong()
-        
-        
+        //執行現在播放的秒數
+        CurrentTime()
   
-    
+        
+        //  播完後，繼續播下一首
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: .main) { (_) in
+            self.index = self.index + 1
+            self.PlaySong()
+        }
+        
     }
+ 
+    
+    
     
     //播放音樂
     func PlaySong()
@@ -98,10 +100,17 @@ class ViewController: UIViewController
                 player.volume = 0.7
                looper = AVPlayerLooper(player: player, templateItem: PlayerItem)
                 
+                
+                //總時間顯示
+                let duration = CMTimeGetSeconds(PlayerItem.asset.duration)
+                        AllPlayingLabel.text = formatConversion(time: duration)
+                
+                
                 //  重置slider和播放軌道
                 SongSlider.setValue(Float(0), animated: true)
                 let TargetTime:CMTime = CMTimeMake(value: Int64(0), timescale: 1)
                 player.seek(to: TargetTime)
+                
                 
                 //  播放
                 player.play()
@@ -111,6 +120,7 @@ class ViewController: UIViewController
               let Seconds:Float64 = CMTimeGetSeconds(Duration)
                 SongSlider.minimumValue = 0
                 SongSlider.maximumValue = Float(Seconds)
+                
                 
                 //  設定播放按鈕圖案
                 PlayButton.setImage(PauseItem, for: UIControl.State.normal)
@@ -130,42 +140,108 @@ class ViewController: UIViewController
     //  播放/暫停
     @IBAction func PlayActionButton(_ sender: UIButton)
     {
-        let ImageName = PlayButton.imageView?.image
-        if ImageName == PlayItem
-        {
             if player.rate == 0
             {
                 player.play()
                 PlayButton.setImage(PauseItem, for: UIControl.State.normal)
             }
-            else if ImageName == PauseItem
-            {
-                if player.rate == 1
-                {
+            else {
+                
                     player.pause()
                     PlayButton.setImage(PlayItem, for: UIControl.State.normal)
                    
                 }
                 
-            }
-        }
+            
+        
     }
     //播放下一首
     @IBAction func NextSongAction(_ sender: UIButton)
     {
         index = index  + 1
         PlaySong()
+      
     }
     
-    
+    //播放前一首
     @IBAction func BackButtonAction(_ sender: UIButton)
     {
         index = index  - 1
         PlaySong()
+        
+        
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    //  拖曳slider進度，要設定player播放軌道
+    @IBAction func SongSliderAction(_ sender: UISlider)
+    {  //  slider移動的位置
+        let Seconds : Int64 = Int64(SongSlider.value)
+        //  計算秒數
+        let TargetTime :CMTime = CMTimeMake(value: Seconds, timescale: 1)
+        //  設定player播放進度
+        player.seek(to: TargetTime)
+        
+    
+        //  如果player暫停，則繼續播放
+        if player.rate == 0
+        {
+            player.play()
+           PlayButton.setImage(PauseItem, for: UIControl.State.normal)
+        }
+    
+        
+    }
+    //現在播放的秒數
+    func CurrentTime() {
+          player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 1), queue: DispatchQueue.main, using: { (CMTime) in
+                  if self.player.currentItem?.status == .readyToPlay {
+                      let currentTime = CMTimeGetSeconds(self.player.currentTime())
+                    //讓Slider跟著連動
+                    self.SongSlider.value = Float(currentTime)
+                    //文字更改
+                    self.NowPlayingLabel.text = self.formatConversion(time: currentTime)
+                  }
+              })
+          }
+    //把秒數轉換成幾分幾秒的格式，最後輸出成一個 String 直接顯示在 Label 上
+    func formatConversion(time:Float64) -> String {
+        let songLength = Int(time)
+        let minutes = Int(songLength / 60) // 求 songLength 的商，為分鐘數
+        let seconds = Int(songLength % 60) // 求 songLength 的餘數，為秒數
+        var time = ""
+        if minutes < 10 {
+          time = "0\(minutes):"
+        } else {
+          time = "\(minutes)"
+        }
+        if seconds < 10 {
+          time += "0\(seconds)"
+        } else {
+          time += "\(seconds)"
+        }
+        return time
+    }
+    
+  
+        
+    
+        
     }
     
     
     
     
-}
+    
+    
+    
+    
+    
+    
 
