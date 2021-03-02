@@ -64,9 +64,11 @@ class ViewController: UIViewController
         
         //  播完後，繼續播下一首
         NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: .main) { (_) in
-            self.index = self.index + 1
+         
+            self.index = self.index - 1
             self.PlaySong()
-        }
+           
+            }
         
     }
  
@@ -81,7 +83,7 @@ class ViewController: UIViewController
             if index  < 0
             {
                 index = PlayList.count - 1
-     
+       
             }
             let AlbumObj = PlayList[index]
             CurrectSong = AlbumObj
@@ -165,16 +167,15 @@ class ViewController: UIViewController
     {
         index -= 1
         PlaySong()
-        
-    print(index)
+        print(index)
       
     }
     
     //播放前一首
+    //因為index = PlayList.count - 1 所以不用動
     @IBAction func BackButtonAction(_ sender: UIButton)
     {
-   
-        index -= 0
+     
         PlaySong()
         print(index)
           
