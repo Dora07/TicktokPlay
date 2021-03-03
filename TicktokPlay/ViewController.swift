@@ -165,7 +165,7 @@ class ViewController: UIViewController
     //播放下一首
     @IBAction func NextSongAction(_ sender: UIButton)
     {
-        index -= 1
+        index += 0
         PlaySong()
         print(index)
       
@@ -175,7 +175,7 @@ class ViewController: UIViewController
     //因為index = PlayList.count - 1 所以不用動
     @IBAction func BackButtonAction(_ sender: UIButton)
     {
-     
+        index -= 1
         PlaySong()
         print(index)
           
